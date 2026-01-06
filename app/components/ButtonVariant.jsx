@@ -35,7 +35,18 @@ const ButtonBase = styled.button`
   transition: all 0.25s ease-in-out;
   font-family: "Poppins", sans-serif;
 
-  ${({ variant }) => {
+  ${({ variant, $customColor }) => {
+    if ($customColor) {
+      return `
+            background: ${$customColor};
+            color: #fff;
+            border: none;
+            &:hover {
+                filter: brightness(1.1);
+                transform: translateY(-3px);
+            }
+         `;
+    }
     const s = variantStyles[variant];
     return `
       background: ${s.background};
@@ -92,29 +103,29 @@ const ColorfulButton = styled(ButtonBase)`
   }
 `;
 
-export default function ButtonVariant({ variant = "dark" }) {
-  let label = "";
+export default function ButtonVariant({ variant = "dark", label, customColor }) {
+  let displayLabel = label;
   let Icon = null;
   let ButtonType = ButtonBase;
 
   switch (variant) {
     case "dark":
-      label = "Book Now";
+      if (!displayLabel) displayLabel = "Pesan Sekarang";
       Icon = <FaArrowRight />;
       ButtonType = DarkButton;
       break;
     case "light":
-      label = "Check Availability";
+      if (!displayLabel) displayLabel = "Cek Ketersediaan";
       Icon = <FaCalendarAlt />;
       ButtonType = LightButton;
       break;
     case "colorful":
-      label = "Reserve Room";
+      if (!displayLabel) displayLabel = "Reservasi Kamar";
       Icon = <FaStar />;
       ButtonType = ColorfulButton;
       break;
     default:
-      label = "Book Now";
+      if (!displayLabel) displayLabel = "Pesan Sekarang";
       Icon = <FaArrowRight />;
       ButtonType = DarkButton;
   }
@@ -127,8 +138,8 @@ export default function ButtonVariant({ variant = "dark" }) {
         marginTop: "2rem",
       }}
     >
-      <ButtonType variant={variant}>
-        {label} {Icon}
+      <ButtonType variant={variant} $customColor={customColor}>
+        {displayLabel} {Icon}
       </ButtonType>
     </div>
   );

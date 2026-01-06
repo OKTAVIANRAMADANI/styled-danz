@@ -71,7 +71,7 @@ export default function FooterVariant({ variant = "dark" }) {
           <Row>
             <Column>
               <Title>Hotel Paradise</Title>
-              <Text>Experience luxury and comfort like never before.</Text>
+              <Text>Nikmati kemewahan dan kenyamanan yang belum pernah Anda rasakan sebelumnya.</Text>
               <Social>
                 <a href="#"><FaFacebookF /></a>
                 <a href="#"><FaInstagram /></a>
@@ -79,19 +79,19 @@ export default function FooterVariant({ variant = "dark" }) {
               </Social>
             </Column>
             <Column>
-              <Title>Quick Links</Title>
-              <Text>Rooms</Text>
-              <Text>Facilities</Text>
-              <Text>Contact</Text>
+              <Title>Tautan Cepat</Title>
+              <Text>Kamar</Text>
+              <Text>Fasilitas</Text>
+              <Text>Kontak</Text>
             </Column>
             <Column>
-              <Title>Contact Us</Title>
+              <Title>Hubungi Kami</Title>
               <Text>Jl. Sunset Road No.88, Bali</Text>
               <Text>+62 812 3456 7890</Text>
               <Text>info@hotelparadise.com</Text>
             </Column>
           </Row>
-          <Bottom>© 2025 Hotel Paradise. All rights reserved.</Bottom>
+          <Bottom>© 2025 Hotel Paradise. Hak cipta dilindungi.</Bottom>
         </Footer>
       );
 
@@ -100,19 +100,19 @@ export default function FooterVariant({ variant = "dark" }) {
         <Footer variant="light">
           <Row>
             <Column>
-              <Title>About Us</Title>
+              <Title>Tentang Kami</Title>
               <Text>
                 Hotel Paradise menghadirkan kenyamanan dan ketenangan dengan pelayanan terbaik untuk setiap tamu.
               </Text>
             </Column>
             <Column>
-              <Title>Get in Touch</Title>
+              <Title>Hubungi Kami</Title>
               <Text>📍 Bali, Indonesia</Text>
               <Text>📞 (021) 9876-5432</Text>
               <Text>✉️ support@hotelparadise.com</Text>
             </Column>
           </Row>
-          <Bottom>© 2025 Hotel Paradise | Designed with care</Bottom>
+          <Bottom>© 2025 Hotel Paradise | Didesain dengan hati</Bottom>
         </Footer>
       );
 
@@ -120,8 +120,8 @@ export default function FooterVariant({ variant = "dark" }) {
       return (
         <Footer variant="colorful">
           <Row style={{ alignItems: "center", textAlign: "center", flexDirection: "column" }}>
-            <Title>Stay with Us — Feel the Difference!</Title>
-            <Text>Join our loyalty program & enjoy exclusive deals every month.</Text>
+            <Title>Menginap Bersama Kami — Rasakan Bedanya!</Title>
+            <Text>Bergabunglah dengan program loyalitas kami & nikmati penawaran eksklusif setiap bulan.</Text>
             <button
               style={{
                 background: "#fff",
@@ -133,10 +133,10 @@ export default function FooterVariant({ variant = "dark" }) {
                 fontWeight: "600",
               }}
             >
-              Join Now
+              Gabung Sekarang
             </button>
           </Row>
-          <Bottom>© 2025 Hotel Paradise | Paradise Moments Await</Bottom>
+          <Bottom>© 2025 Hotel Paradise | Momen Surga Menanti</Bottom>
         </Footer>
       );
 

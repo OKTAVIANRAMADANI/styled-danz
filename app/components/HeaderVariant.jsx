@@ -57,21 +57,21 @@ export default function HeaderVariant({ variant = "dark", children }) {
         <Header variant="dark">
           <Logo>{children}</Logo>
           <Nav>
-            <Link href="#">Home</Link>
-            <Link href="#">Rooms</Link>
-            <Link href="#">Contact</Link>
+            <Link href="#">Beranda</Link>
+            <Link href="#">Kamar</Link>
+            <Link href="#">Kontak</Link>
           </Nav>
-          <SearchBox variant="dark" placeholder="Search..." />
+          <SearchBox variant="dark" placeholder="Cari..." />
         </Header>
       )}
 
       {variant === "light" && (
         <Header variant="light">
-          <SearchBox variant="light" placeholder="Search here..." />
+          <SearchBox variant="light" placeholder="Cari di sini..." />
           <Logo>{children}</Logo>
           <Nav>
-            <Link href="#">Home</Link>
-            <Link href="#">Facilities</Link>
+            <Link href="#">Beranda</Link>
+            <Link href="#">Fasilitas</Link>
             <Link href="#">Booking</Link>
           </Nav>
         </Header>
@@ -80,11 +80,11 @@ export default function HeaderVariant({ variant = "dark", children }) {
       {variant === "colorful" && (
         <Header variant="colorful">
           <Logo>{children}</Logo>
-          <SearchBox variant="colorful" placeholder="Find a room..." />
+          <SearchBox variant="colorful" placeholder="Temukan kamar..." />
           <Nav>
-            <Link href="#">Discover</Link>
-            <Link href="#">Gallery</Link>
-            <Link href="#">About</Link>
+            <Link href="#">Jelajahi</Link>
+            <Link href="#">Galeri</Link>
+            <Link href="#">Tentang</Link>
           </Nav>
         </Header>
       )}
