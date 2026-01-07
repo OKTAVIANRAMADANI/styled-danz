@@ -6,8 +6,8 @@
     "access": "public"
   },
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start"
   },
   "dependencies": {
@@ -19,11 +19,5 @@
     "sass": "^1.93.3",
     "scss": "^0.2.4",
     "styled-components": "^6.1.19"
-  },
-
-  "files": {
-    "components",
-    "index.js",
-    "README.md"
   }
 }
