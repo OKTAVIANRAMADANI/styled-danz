@@ -54,7 +54,7 @@ const CopyButton = styled.button`
 
 export default function Installation() {
     const [copied, setCopied] = useState(false);
-    const command = "npm install @nexus/core";
+    const command = "npm install styled_dannzz";
 
     const handleCopy = () => {
         navigator.clipboard.writeText(command);

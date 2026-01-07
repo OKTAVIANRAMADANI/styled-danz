@@ -1,6 +1,25 @@
 "use client";
 import styled from "styled-components";
 
+// Default items if not provided
+const DEFAULT_MENU_DARK = [
+  { label: "Beranda", href: "#" },
+  { label: "Kamar", href: "#" },
+  { label: "Kontak", href: "#" },
+];
+
+const DEFAULT_MENU_LIGHT = [
+  { label: "Beranda", href: "#" },
+  { label: "Fasilitas", href: "#" },
+  { label: "Booking", href: "#" },
+];
+
+const DEFAULT_MENU_COLORFUL = [
+  { label: "Jelajahi", href: "#" },
+  { label: "Galeri", href: "#" },
+  { label: "Tentang", href: "#" },
+];
+
 const variantStyles = {
   dark: { background: "#1a1a1a", color: "#fff" },
   light: { background: "#bb7e7eff", color: "#000" },
@@ -50,42 +69,82 @@ const SearchBox = styled.input`
       : "background:rgba(255,255,255,0.2); color:#fff;"}
 `;
 
-export default function HeaderVariant({ variant = "dark", children }) {
+const ActionButton = styled.button`
+  background: white;
+  color: #333;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+`;
+
+export default function HeaderVariant({
+  variant = "dark",
+  logo,
+  children,
+  menuItems,
+  buttonText,
+  onButtonClick
+}) {
+  const displayLogo = logo || children;
+
+  // Render helper for Nav links
+  const renderNav = (defaultItems) => {
+    const items = menuItems || defaultItems;
+    return (
+      <Nav>
+        {items.map((item, idx) => (
+          <Link key={idx} href={item.href}>{item.label}</Link>
+        ))}
+      </Nav>
+    );
+  };
+
   return (
     <>
       {variant === "dark" && (
         <Header variant="dark">
-          <Logo>{children}</Logo>
-          <Nav>
-            <Link href="#">Beranda</Link>
-            <Link href="#">Kamar</Link>
-            <Link href="#">Kontak</Link>
-          </Nav>
-          <SearchBox variant="dark" placeholder="Cari..." />
+          <Logo>{displayLogo || "Dashboard"}</Logo>
+          {renderNav(DEFAULT_MENU_DARK)}
+          {buttonText ? (
+            <ActionButton onClick={onButtonClick}>{buttonText}</ActionButton>
+          ) : (
+            <SearchBox variant="dark" placeholder="Cari..." />
+          )}
         </Header>
       )}
 
       {variant === "light" && (
         <Header variant="light">
-          <SearchBox variant="light" placeholder="Cari di sini..." />
-          <Logo>{children}</Logo>
-          <Nav>
-            <Link href="#">Beranda</Link>
-            <Link href="#">Fasilitas</Link>
-            <Link href="#">Booking</Link>
-          </Nav>
+          {buttonText ? (
+            <ActionButton onClick={onButtonClick}>{buttonText}</ActionButton>
+          ) : (
+            <SearchBox variant="light" placeholder="Cari di sini..." />
+          )}
+          <Logo>{displayLogo || "Dashboard"}</Logo>
+          {renderNav(DEFAULT_MENU_LIGHT)}
         </Header>
       )}
 
       {variant === "colorful" && (
         <Header variant="colorful">
-          <Logo>{children}</Logo>
-          <SearchBox variant="colorful" placeholder="Temukan kamar..." />
-          <Nav>
-            <Link href="#">Jelajahi</Link>
-            <Link href="#">Galeri</Link>
-            <Link href="#">Tentang</Link>
-          </Nav>
+          <Logo>{displayLogo || "Dashboard"}</Logo>
+          {buttonText ? (
+            <ActionButton onClick={onButtonClick}>{buttonText}</ActionButton>
+          ) : (
+            <SearchBox variant="colorful" placeholder="Temukan kamar..." />
+          )}
+          {renderNav(DEFAULT_MENU_COLORFUL)}
+        </Header>
+      )}
+
+      {/* Fallback or other variants can use a generic structure if needed, 
+           but for now we stick to the 3 main ones to preserve shape. */}
+      {!["dark", "light", "colorful"].includes(variant) && (
+        <Header variant="dark">
+          <Logo>{displayLogo || "Brand"}</Logo>
+          {renderNav(DEFAULT_MENU_DARK)}
         </Header>
       )}
     </>

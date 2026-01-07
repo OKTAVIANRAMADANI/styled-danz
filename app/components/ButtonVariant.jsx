@@ -103,30 +103,31 @@ const ColorfulButton = styled(ButtonBase)`
   }
 `;
 
-export default function ButtonVariant({ variant = "dark", label, customColor }) {
+export default function ButtonVariant({ variant = "dark", label, customColor, icon }) {
   let displayLabel = label;
-  let Icon = null;
+  let Icon = icon;
   let ButtonType = ButtonBase;
 
+  // Defaults if no specific props provided
   switch (variant) {
     case "dark":
       if (!displayLabel) displayLabel = "Pesan Sekarang";
-      Icon = <FaArrowRight />;
+      if (!Icon) Icon = <FaArrowRight />;
       ButtonType = DarkButton;
       break;
     case "light":
       if (!displayLabel) displayLabel = "Cek Ketersediaan";
-      Icon = <FaCalendarAlt />;
+      if (!Icon) Icon = <FaCalendarAlt />;
       ButtonType = LightButton;
       break;
     case "colorful":
       if (!displayLabel) displayLabel = "Reservasi Kamar";
-      Icon = <FaStar />;
+      if (!Icon) Icon = <FaStar />;
       ButtonType = ColorfulButton;
       break;
     default:
       if (!displayLabel) displayLabel = "Pesan Sekarang";
-      Icon = <FaArrowRight />;
+      if (!Icon) Icon = <FaArrowRight />;
       ButtonType = DarkButton;
   }
 

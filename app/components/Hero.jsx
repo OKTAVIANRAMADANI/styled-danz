@@ -81,11 +81,9 @@ export default function Hero({ onGetStarted }) {
                 Rasakan masa depan pengembangan web. Fondasi yang kuat, fleksibel, dan modern
                 untuk proyek besar Anda berikutnya.
             </Description>
-            <Link href="/dashboard" passHref legacyBehavior>
-                <Button as="a">
-                    Mulai Sekarang <FaArrowRight />
-                </Button>
-            </Link>
+            <Button as={Link} href="/dashboard">
+                Mulai Sekarang <FaArrowRight />
+            </Button>
         </HeroContainer>
     );
 }

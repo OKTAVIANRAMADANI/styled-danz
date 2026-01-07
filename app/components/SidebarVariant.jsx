@@ -93,21 +93,21 @@ const Item = styled.button`
   &:hover {
     background: ${({ variant }) => variantStyles[variant].hover};
     transform: ${({ variant }) =>
-      variant === "colorful"
-        ? "translateX(5px) scale(1.05)"
-        : "translateX(5px)"};
+    variant === "colorful"
+      ? "translateX(5px) scale(1.05)"
+      : "translateX(5px)"};
     box-shadow: ${({ variant }) =>
-      variant === "colorful"
-        ? "0 0 12px rgba(255,255,255,0.4)"
-        : "none"};
+    variant === "colorful"
+      ? "0 0 12px rgba(255,255,255,0.4)"
+      : "none"};
   }
 
   svg {
     font-size: ${({ variant }) =>
-      variant === "colorful" ? "22px" : "18px"};
+    variant === "colorful" ? "22px" : "18px"};
     ${({ variant }) =>
-      variant === "colorful" &&
-      `
+    variant === "colorful" &&
+    `
       background: rgba(255,255,255,0.2);
       padding: 8px;
       border-radius: 50%;
@@ -116,39 +116,47 @@ const Item = styled.button`
 
   span {
     ${({ variant }) =>
-      variant === "light" &&
-      `
+    variant === "light" &&
+    `
       display: none;
     `}
     ${({ variant }) =>
-      variant === "colorful" &&
-      `
+    variant === "colorful" &&
+    `
       font-weight: 500;
       letter-spacing: 0.5px;
     `}
   }
 `;
 
-export default function SidebarVariant({ variant = "dark", onSelect }) {
-  const items = [
-    { name: "Header", icon: <FaHome /> },
-    { name: "Card", icon: <FaBed /> },
-    { name: "Button", icon: <FaConciergeBell /> },
-    { name: "Footer", icon: <FaInfoCircle /> },
-    { name: "Sidebar", icon: <FaUser /> },
-  ];
+// Default Items
+const DEFAULT_ITEMS = [
+  { name: "Header", icon: <FaHome /> },
+  { name: "Card", icon: <FaBed /> },
+  { name: "Button", icon: <FaConciergeBell /> },
+  { name: "Footer", icon: <FaInfoCircle /> },
+  { name: "Sidebar", icon: <FaUser /> },
+];
+
+export default function SidebarVariant({
+  variant = "dark",
+  logo,
+  menuItems = DEFAULT_ITEMS,
+  onSelect
+}) {
+  const displayTitle = logo || variantStyles[variant].title;
 
   return (
     <SidebarBase variant={variant}>
-      <Title variant={variant}>{variantStyles[variant].title}</Title>
-      {items.map((item) => (
+      <Title variant={variant}>{displayTitle}</Title>
+      {menuItems.map((item, index) => (
         <Item
-          key={item.name}
+          key={index}
           variant={variant}
-          onClick={() => onSelect?.(item.name.toLowerCase())}
+          onClick={() => onSelect?.(item.name?.toLowerCase() || item.label?.toLowerCase())}
         >
           {item.icon}
-          <span>{item.name}</span>
+          <span>{item.name || item.label}</span>
         </Item>
       ))}
     </SidebarBase>

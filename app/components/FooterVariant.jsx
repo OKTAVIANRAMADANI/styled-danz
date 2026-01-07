@@ -4,8 +4,8 @@ import { FaFacebookF, FaInstagram, FaTwitter } from "react-icons/fa";
 
 const variantStyles = {
   dark: { background: "#1a1a1a", color: "#fff" },
-  light: { background: "#c96b6bff", color: "#000" },
-  colorful: { background: "#0dcaf0", color: "#fff" },
+  light: { background: "#ffffff", color: "#000", border: '1px solid #e2e8f0' },
+  colorful: { background: "linear-gradient(135deg, #0dcaf0, #6610f2)", color: "#fff" },
 };
 
 const Footer = styled.footer`
@@ -63,84 +63,81 @@ const Bottom = styled.div`
   padding-top: 1rem;
 `;
 
-export default function FooterVariant({ variant = "dark" }) {
-  switch (variant) {
-    case "dark":
-      return (
-        <Footer variant="dark">
-          <Row>
-            <Column>
-              <Title>Hotel Paradise</Title>
-              <Text>Nikmati kemewahan dan kenyamanan yang belum pernah Anda rasakan sebelumnya.</Text>
-              <Social>
-                <a href="#"><FaFacebookF /></a>
-                <a href="#"><FaInstagram /></a>
-                <a href="#"><FaTwitter /></a>
-              </Social>
-            </Column>
-            <Column>
-              <Title>Tautan Cepat</Title>
-              <Text>Kamar</Text>
-              <Text>Fasilitas</Text>
-              <Text>Kontak</Text>
-            </Column>
-            <Column>
-              <Title>Hubungi Kami</Title>
-              <Text>Jl. Sunset Road No.88, Bali</Text>
-              <Text>+62 812 3456 7890</Text>
-              <Text>info@hotelparadise.com</Text>
-            </Column>
-          </Row>
-          <Bottom>© 2025 Hotel Paradise. Hak cipta dilindungi.</Bottom>
-        </Footer>
-      );
+const DefaultLinks = [
+  { title: "Tautan Cepat", items: ["Kamar", "Fasilitas", "Kontak"] },
+  { title: "Legal", items: ["Privasi", "Syarat"] }
+];
 
-    case "light":
-      return (
-        <Footer variant="light">
-          <Row>
-            <Column>
-              <Title>Tentang Kami</Title>
-              <Text>
-                Hotel Paradise menghadirkan kenyamanan dan ketenangan dengan pelayanan terbaik untuk setiap tamu.
-              </Text>
-            </Column>
-            <Column>
-              <Title>Hubungi Kami</Title>
-              <Text>📍 Bali, Indonesia</Text>
-              <Text>📞 (021) 9876-5432</Text>
-              <Text>✉️ support@hotelparadise.com</Text>
-            </Column>
-          </Row>
-          <Bottom>© 2025 Hotel Paradise | Didesain dengan hati</Bottom>
-        </Footer>
-      );
+export default function FooterVariant({
+  variant = "dark",
+  companyName = "Hotel Paradise",
+  description,
+  links = DefaultLinks,
+  contactInfo,
+  copyright,
+  onJoinClick
+}) {
+  const currentYear = new Date().getFullYear();
+  const defaultDesc = "Nikmati kemewahan dan kenyamanan yang belum pernah Anda rasakan sebelumnya.";
+  const defaultContact = { address: "Jl. Sunset Road No.88, Bali", phone: "+62 812 3456 7890", email: "info@hotelparadise.com" };
+  const displayContact = contactInfo || defaultContact;
 
-    case "colorful":
-      return (
-        <Footer variant="colorful">
-          <Row style={{ alignItems: "center", textAlign: "center", flexDirection: "column" }}>
-            <Title>Menginap Bersama Kami — Rasakan Bedanya!</Title>
-            <Text>Bergabunglah dengan program loyalitas kami & nikmati penawaran eksklusif setiap bulan.</Text>
-            <button
-              style={{
-                background: "#fff",
-                color: "#0dcaf0",
-                border: "none",
-                padding: "0.7rem 1.5rem",
-                borderRadius: "8px",
-                cursor: "pointer",
-                fontWeight: "600",
-              }}
-            >
-              Gabung Sekarang
-            </button>
-          </Row>
-          <Bottom>© 2025 Hotel Paradise | Momen Surga Menanti</Bottom>
-        </Footer>
-      );
-
-    default:
-      return <Footer variant="dark">© 2025 Hotel Paradise</Footer>;
+  if (variant === "colorful") {
+    return (
+      <Footer variant="colorful">
+        <Row style={{ alignItems: "center", textAlign: "center", flexDirection: "column" }}>
+          <Title>Menginap Bersama Kami — Rasakan Bedanya!</Title>
+          <Text>Bergabunglah dengan program loyalitas kami & nikmati penawaran eksklusif setiap bulan.</Text>
+          <button
+            onClick={onJoinClick}
+            style={{
+              background: "#fff",
+              color: "#0dcaf0",
+              border: "none",
+              padding: "0.7rem 1.5rem",
+              borderRadius: "8px",
+              cursor: "pointer",
+              fontWeight: "600",
+            }}
+          >
+            Gabung Sekarang
+          </button>
+        </Row>
+        <Bottom>{copyright || `© ${currentYear} ${companyName} | Momen Surga Menanti`}</Bottom>
+      </Footer>
+    );
   }
+
+  return (
+    <Footer variant={variant}>
+      <Row>
+        <Column>
+          <Title>{companyName}</Title>
+          <Text>{description || defaultDesc}</Text>
+          <Social>
+            <a href="#"><FaFacebookF /></a>
+            <a href="#"><FaInstagram /></a>
+            <a href="#"><FaTwitter /></a>
+          </Social>
+        </Column>
+
+        {links.map((group, idx) => (
+          <Column key={idx}>
+            <Title>{group.title}</Title>
+            {group.items.map((item, i) => (
+              <Text key={i}>{item}</Text>
+            ))}
+          </Column>
+        ))}
+
+        <Column>
+          <Title>Hubungi Kami</Title>
+          <Text>{displayContact.address}</Text>
+          <Text>{displayContact.phone}</Text>
+          <Text>{displayContact.email}</Text>
+        </Column>
+      </Row>
+      <Bottom>{copyright || `© ${currentYear} ${companyName}. Hak cipta dilindungi.`}</Bottom>
+    </Footer>
+  );
 }

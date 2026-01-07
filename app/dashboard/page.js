@@ -43,58 +43,24 @@ const SectionTitle = styled.h2`
   padding-bottom: 1rem;
 `;
 
-const ControlPanel = styled.div`
-  background: rgba(30, 41, 59, 0.5);
-  padding: 1.5rem;
-  border-radius: 12px;
-  margin-bottom: 2rem;
-  border: 1px solid var(--glass-border);
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-`;
-
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  flex: 1;
-  min-width: 200px;
-
-  label {
-    color: var(--gray);
-    font-size: 0.9rem;
-  }
-
-  input, select {
-    background: #0f172a;
-    border: 1px solid var(--glass-border);
-    color: var(--light);
-    padding: 0.6rem;
-    border-radius: 6px;
-    outline: none;
-    
-    &:focus {
-      border-color: var(--primary);
-    }
-  }
-`;
-
 /* Usage Viewer Component */
-const UsageViewer = ({ componentName, selfClosing = false, customProps = {} }) => {
+const UsageViewer = ({ componentName, selfClosing = false, customProps = {}, customCode }) => {
     const [selectedVariant, setSelectedVariant] = useState("dark");
     const [copied, setCopied] = useState(false);
 
-    // Filter out empty props
-    const validProps = Object.entries(customProps)
-        .filter(([_, value]) => value && value !== "")
-        .map(([key, value]) => `${key}="${value}"`)
-        .join(" ");
-
-    const propsString = validProps ? ` ${validProps}` : "";
-
-    // Generate code based on selection
+    // Generate code: Use customCode function if provided, otherwise default generation
     const generateCode = () => {
+        if (customCode) {
+            return customCode(selectedVariant);
+        }
+
+        const validProps = Object.entries(customProps)
+            .filter(([_, value]) => value && value !== "")
+            .map(([key, value]) => `${key}="${value}"`)
+            .join(" ");
+
+        const propsString = validProps ? ` ${validProps}` : "";
+
         if (selfClosing) {
             return `<${componentName} variant="${selectedVariant}"${propsString} />`;
         }
@@ -131,6 +97,7 @@ const UsageViewer = ({ componentName, selfClosing = false, customProps = {} }) =
                         <option value="dark">Varian Gelap (Dark)</option>
                         <option value="light">Varian Terang (Light)</option>
                         <option value="colorful">Varian Berwarna (Colorful)</option>
+                        <option value="flat">Varian Flat</option>
                     </select>
                     <span style={{ position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', fontSize: '0.8rem', color: 'var(--gray)' }}>
                         ▼
@@ -149,7 +116,8 @@ const UsageViewer = ({ componentName, selfClosing = false, customProps = {} }) =
                         color: "#cbd5e1",
                         whiteSpace: "pre-wrap",
                         border: "1px solid rgba(255,255,255,0.1)",
-                        boxShadow: "0 4px 6px rgba(0,0,0,0.1)"
+                        boxShadow: "0 4px 6px rgba(0,0,0,0.1)",
+                        overflowX: "auto"
                     }}
                 >
                     {generateCode()}
@@ -198,7 +166,26 @@ function DashboardContent() {
                             <HeaderVariant variant="light">Dashboard</HeaderVariant>
                             <HeaderVariant variant="colorful">Dashboard</HeaderVariant>
                         </div>
-                        <UsageViewer componentName="HeaderVariant" />
+                        <UsageViewer
+                            componentName="HeaderVariant"
+                            customCode={(variant) => `import HeaderVariant from "@/components/HeaderVariant";
+
+export default function MyPage() {
+  return (
+    <HeaderVariant
+      variant="${variant}"
+      logo="Brand Studio"
+      menuItems={[
+        { label: "Home", href: "#" },
+        { label: "Products", href: "#" },
+        { label: "About", href: "#" },
+      ]}
+      buttonText="Get Started"
+      onButtonClick={() => alert("Button clicked!")}
+    />
+  );
+}`}
+                        />
                     </>
                 );
 
@@ -216,6 +203,13 @@ function DashboardContent() {
                         <UsageViewer
                             componentName="CardVariant"
                             selfClosing
+                            customCode={(variant) => `<CardVariant 
+    variant="${variant}" 
+    title="Judul Kustom" 
+    description="Deskripsi kartu yang bisa diubah sesuai kebutuhan." 
+    price="Rp 500.000" 
+    image="/path/to/image.jpg"
+/>`}
                         />
                     </>
                 );
@@ -233,6 +227,11 @@ function DashboardContent() {
                         <UsageViewer
                             componentName="ButtonVariant"
                             selfClosing
+                            customCode={(variant) => `<ButtonVariant 
+    variant="${variant}" 
+    label="Klik Disini" 
+    customColor="#ff0000" // Opsional
+/>`}
                         />
                     </>
                 );
@@ -246,7 +245,18 @@ function DashboardContent() {
                             <FooterVariant variant="light" />
                             <FooterVariant variant="colorful" />
                         </div>
-                        <UsageViewer componentName="FooterVariant" selfClosing />
+                        <UsageViewer
+                            componentName="FooterVariant"
+                            selfClosing
+                            customCode={(variant) => `<FooterVariant 
+    variant="${variant}" 
+    companyName="Perusahaan Saya"
+    links={[
+        { title: "Produk", items: ["Fitur", "Harga"] },
+        { title: "Perusahaan", items: ["Tentang", "Karir"] }
+    ]}
+/>`}
+                        />
                     </>
                 );
 
@@ -269,7 +279,18 @@ function DashboardContent() {
                                 </div>
                             ))}
                         </div>
-                        <UsageViewer componentName="SidebarVariant" selfClosing />
+                        <UsageViewer
+                            componentName="SidebarVariant"
+                            selfClosing
+                            customCode={(variant) => `<SidebarVariant 
+    variant="${variant}" 
+    logo="MyBrand"
+    menuItems={[
+        { icon: <FaHome/>, label: "Home", href: "/" },
+        { icon: <FaUser/>, label: "Profile", href: "/profile" }
+    ]}
+/>`}
+                        />
                     </>
                 );
 

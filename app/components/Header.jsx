@@ -1,6 +1,7 @@
 "use client";
 import styled from "styled-components";
-import { FaSearch, FaBell } from "react-icons/fa";
+import { FaSearch, FaBell, FaMoon, FaSun } from "react-icons/fa";
+import { useState, useEffect } from "react";
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -15,7 +16,7 @@ const HeaderContainer = styled.header`
 const SearchBar = styled.div`
   display: flex;
   align-items: center;
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--panel-bg);
   border: 1px solid var(--glass-border);
   padding: 0.8rem 1.5rem;
   border-radius: 50px;
@@ -25,7 +26,7 @@ const SearchBar = styled.div`
   input {
     background: transparent;
     border: none;
-    color: var(--light);
+    color: var(--foreground);
     margin-left: 1rem;
     width: 100%;
     outline: none;
@@ -48,7 +49,7 @@ const Actions = styled.div`
 `;
 
 const IconButton = styled.button`
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--panel-bg);
   border: 1px solid var(--glass-border);
   width: 45px;
   height: 45px;
@@ -56,13 +57,14 @@ const IconButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--light);
+  color: var(--foreground);
   cursor: pointer;
   transition: all 0.2s;
 
   &:hover {
     background: var(--primary);
     border-color: var(--primary);
+    color: #fff;
   }
 `;
 
@@ -83,14 +85,38 @@ const Button = styled.button`
 `;
 
 export default function Header() {
+    const [isDark, setIsDark] = useState(true);
+
+    useEffect(() => {
+        // Check initial preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setIsDark(savedTheme === 'dark');
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+            // Default to dark
+            document.documentElement.setAttribute('data-theme', 'dark');
+        }
+    }, []);
+
+    const toggleTheme = () => {
+        const newTheme = !isDark ? 'dark' : 'light';
+        setIsDark(!isDark);
+        document.documentElement.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+    };
+
     return (
         <HeaderContainer>
             <SearchBar>
                 <FaSearch />
-                <input type="text" placeholder="Search anything..." />
+                <input type="text" placeholder="Cari sesuatu..." />
             </SearchBar>
 
             <Actions>
+                <IconButton onClick={toggleTheme} title="Ganti Tema">
+                    {isDark ? <FaSun /> : <FaMoon />}
+                </IconButton>
                 <IconButton>
                     <FaBell />
                 </IconButton>

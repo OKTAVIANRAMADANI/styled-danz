@@ -62,8 +62,8 @@ const NavItem = styled.div`
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  color: ${({ isActive }) => (isActive ? 'var(--primary)' : 'var(--gray)')};
-  background: ${({ isActive }) => (isActive ? 'rgba(79, 70, 229, 0.1)' : 'transparent')};
+  color: ${({ $isActive }) => ($isActive ? 'var(--primary)' : 'var(--gray)')};
+  background: ${({ $isActive }) => ($isActive ? 'rgba(79, 70, 229, 0.1)' : 'transparent')};
   text-decoration: none;
   border-radius: 12px;
   transition: all 0.3s ease;
@@ -138,25 +138,25 @@ export default function Sidebar({ activeItem, onSelect }) {
             </LogoContainer>
 
             <Nav>
-                <NavItem isActive={activeItem === "home"} onClick={() => window.location.href = "/"}>
+                <NavItem $isActive={activeItem === "home"} onClick={() => window.location.href = "/"}>
                     <FaHome /> Home
                 </NavItem>
 
                 <SectionLabel>Components</SectionLabel>
 
-                <NavItem isActive={activeItem === "header"} onClick={() => handleSelect("header")}>
+                <NavItem $isActive={activeItem === "header"} onClick={() => handleSelect("header")}>
                     <FaLayerGroup /> Header
                 </NavItem>
-                <NavItem isActive={activeItem === "card"} onClick={() => handleSelect("card")}>
+                <NavItem $isActive={activeItem === "card"} onClick={() => handleSelect("card")}>
                     <FaCreditCard /> Card
                 </NavItem>
-                <NavItem isActive={activeItem === "button"} onClick={() => handleSelect("button")}>
+                <NavItem $isActive={activeItem === "button"} onClick={() => handleSelect("button")}>
                     <FaHandPointer /> Button
                 </NavItem>
-                <NavItem isActive={activeItem === "sidebar"} onClick={() => handleSelect("sidebar")}>
+                <NavItem $isActive={activeItem === "sidebar"} onClick={() => handleSelect("sidebar")}>
                     <FaColumns /> Sidebar
                 </NavItem>
-                <NavItem isActive={activeItem === "footer"} onClick={() => handleSelect("footer")}>
+                <NavItem $isActive={activeItem === "footer"} onClick={() => handleSelect("footer")}>
                     <FaInfoCircle /> Footer
                 </NavItem>
             </Nav>
@@ -164,7 +164,7 @@ export default function Sidebar({ activeItem, onSelect }) {
             <UserProfile>
                 <Avatar />
                 <UserInfo>
-                    <h4>Alex Morgan</h4>
+                    <h4>Dannzz Bjir lah</h4>
                     <span>Pro Member</span>
                 </UserInfo>
                 <FaSignOutAlt style={{ marginLeft: 'auto', cursor: 'pointer', color: 'var(--gray)' }} />
