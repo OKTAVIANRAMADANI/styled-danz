@@ -54,7 +54,7 @@ const CopyButton = styled.button`
 
 export default function Installation() {
     const [copied, setCopied] = useState(false);
-    const command = "npm install styled_dannzz";
+    const command = "npm install styled-danz";
 
     const handleCopy = () => {
         navigator.clipboard.writeText(command);
