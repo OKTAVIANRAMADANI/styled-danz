@@ -71,6 +71,6 @@ export default function Installation() {
                     {copied ? <FaCheck style={{ color: '#22c55e' }} /> : <FaCopy />}
                 </CopyButton>
             </CodeBlock>
-        </Container>
+        </Container>  
     );
 }
