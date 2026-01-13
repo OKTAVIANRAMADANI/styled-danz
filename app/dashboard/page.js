@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect, Suspense } from "react";
-import { useSearchParams } from "next/navigation";
 import styled from "styled-components";
+import { useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense, useEffect } from "react";
 import Sidebar from "../components/Sidebar";
 import Header from "../components/Header";
 import HeaderVariant from "../components/HeaderVariant";

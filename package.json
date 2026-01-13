@@ -1,13 +1,17 @@
 {
   "name": "styled_dannzz",
+<<<<<<< HEAD
   "version": "0.1.1",
+=======
+  "version": "0.1.2",
+>>>>>>> a0f67015d14202d7555af95dc9a277da81b31051
   "private": false,
   "publishConfig": {
     "access": "public"
   },
   "scripts": {
-    "dev": "next dev --webpack",
-    "build": "next build --webpack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start"
   },
   "dependencies": {

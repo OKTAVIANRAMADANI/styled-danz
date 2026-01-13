@@ -1,5 +1,0 @@
-[00:00:06.568] Server  LOG     ✓ Ready in 5s
-[00:00:09.688] Server  LOG     ○ Compiling /dashboard ...
-[00:00:21.760] Server  WARN    styled-components: it looks like an unknown prop "variant" is being sent through to the DOM, which will likely trigger a React console error. If you would like automatic filtering of unknown props, you can opt-into that behavior via `<StyleSheetManager shouldForwardProp={...}>` (connect an API like `@emotion/is-prop-valid`) or consider using transient props (`$` prefix for automatic filtering.)
-[00:00:27.287] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:00:27.901] Browser WARN    styled-components: it looks like an unknown prop "variant" is being sent through to the DOM, which will likely trigger a React console error. If you would like automatic filtering of unknown props, you can opt-into that behavior via `<StyleSheetManager shouldForwardProp={...}>` (connect an API like `@emotion/is-prop-valid`) or consider using transient props (`$` prefix for automatic filtering.)
