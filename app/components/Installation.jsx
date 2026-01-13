@@ -53,24 +53,24 @@ const CopyButton = styled.button`
 `;
 
 export default function Installation() {
-    const [copied, setCopied] = useState(false);
-    const command = "npm install styled_dannzz";
+  const [copied, setCopied] = useState(false);
+  const command = "npm install styled-danz-ui";
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText(command);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
+  const handleCopy = () => {
+    navigator.clipboard.writeText(command);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-    return (
-        <Container id="install">
-            <Title>Instalasi Cepat</Title>
-            <CodeBlock>
-                <Command>$ {command}</Command>
-                <CopyButton onClick={handleCopy}>
-                    {copied ? <FaCheck style={{ color: '#22c55e' }} /> : <FaCopy />}
-                </CopyButton>
-            </CodeBlock>
-        </Container>
-    );
+  return (
+    <Container id="install">
+      <Title>Instalasi Cepat</Title>
+      <CodeBlock>
+        <Command>$ {command}</Command>
+        <CopyButton onClick={handleCopy}>
+          {copied ? <FaCheck style={{ color: '#22c55e' }} /> : <FaCopy />}
+        </CopyButton>
+      </CodeBlock>
+    </Container>
+  );
 }
