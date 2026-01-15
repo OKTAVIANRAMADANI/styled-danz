@@ -67,7 +67,7 @@ export default function Installation() {
       <Title>Instalasi Cepat</Title>
       <CodeBlock>
         <Command>$ {command}</Command>
-        <CopyButton on  Click={handleCopy}>
+        <CopyButton onClick={handleCopy}>
           {copied ? <FaCheck style={{ color: '#22c55e' }} /> : <FaCopy />}
         </CopyButton>
       </CodeBlock>

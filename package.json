@@ -1,10 +1,6 @@
 {
   "name": "styled_dannzz",
-<<<<<<< HEAD
-  "version": "0.1.1",
-=======
   "version": "0.1.2",
->>>>>>> a0f67015d14202d7555af95dc9a277da81b31051
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -21,11 +17,5 @@
     "react-icons": "^5.5.0",
     "sass": "^1.93.3",
     "styled-components": "^6.1.19"
-  },
-  "files": [
-    "components",
-    "index.js",
-    "README.md",
-    "dashboard"
-  ]
+  }
 }
